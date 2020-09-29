@@ -49,12 +49,14 @@ public class ProxyGenerator {
 	}
 
 	private int defineProxy() {
-		boolean getName = false;
+		boolean postField = false;
 		boolean hear = false;
 		boolean leave = false;
 		boolean enter = false;
 		boolean setStone = false;
 		boolean getStone = false;
+		boolean say = false;
+		boolean positionStone = false;
 		Method[] methods = InputInterface.class.getDeclaredMethods();
 		
 		for(int i=0; i < methods.length; i++) {
@@ -62,29 +64,34 @@ public class ProxyGenerator {
 			System.out.println(methods[i]);		
 			String m = methods[i].toString();
 			switch (m) {
-				case "public abstract java.lang.String generator.InputInterface.getName()" : System.out.println("getName"); 
-					getName = true;
+				case "public abstract void InputInterface.postField(char[][])" : System.out.println("postField"); 
+					postField = true;
 				
 				break;
 				case "public abstract void generator.InputInterface.hear(java.lang.String)" : System.out.println("hear"); 
 					hear = true;
 				
 				break;
-				case "public abstract void generator.InputInterface.leave(generator.IChatter)" : System.out.println("leave"); 
+				case "public abstract void InputInterface.leave(ISpieler)" : System.out.println("leave"); 
 					leave = true;
 				
 				break;
-				case "public abstract void generator.InputInterface.enter(generator.IChatter)" : System.out.println("enter"); 
+				case "public abstract void InputInterface.enter(ISpieler)" : System.out.println("enter"); 
 					enter = true;
 				
 				break;
-				case "public abstract java.lang.Char generator.InputInterface.setStone()" : System.out.println("setStone");
-					setStone = true;
+				case "public abstract void InputInterface.say(java.lang.String,ISpieler)" : System.out.println("say");
+					say = true;
+
 				break;
 				case "public abstract java.lang.Char generator.InputInterface.getStone()" : System.out.println("getStone");
 					getStone = true;
 					
 				break;
+				case "public abstract boolean InputInterface.positionStone(char[][],ISpieler,int)" : System.out.println("PositionStone");
+				positionStone = true;
+				
+			break;
 				default: handleError(); break;
 				
 			}
